@@ -1,6 +1,6 @@
 # BAUN CENG Programlama Notları
 ## Bu nedir?
-Balıkesir Üniversitesi'nde eğitim görmeye devam ettiğim sürece derslerde aldığım notları, yazdığım kodları gibi bilgileri burada saklıyorum.
+Balıkesir Üniversitesi'nde eğitim görmeye devam ettiğim sürece derslerde aldığım notlar, yazdığım kodlar gibi materyalleri burada saklıyorum.
 
 ## E peki dosyalar?
 Notarı tutarken git'in dallarını kullanıyorum. `Branch:` adlı menüden bulunduğunuz dalı değiştirebilir veya doğrudan bu linklerle bulunduğunuz dalı değiştirebilirsiniz:
