@@ -2,14 +2,14 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
-- 04.10.2018
+- 2. Hafta (04.10.2018)
   - İsim alanları (namespaceler)
   - `using` anahtar sözcüğü
   - `using` ile takma isimler (aliasing)
   - İç içe isim alanları (nested namespaces)
   - Kütüphane dosyaları oluşturma (DLL) ve `using` ile kullanma.
 
-- 27.09.2018
+- 1. Hafta (27.09.2018)
   - İşaretçiler (pointerlar)
   - `unsafe` bloğu
   - İşaretçiler ile aritmetik
