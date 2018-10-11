@@ -8,6 +8,7 @@
     - MaxValue, MinValue durumları
     - Char.ToUpper
     - Decimal, DateTime ve TimeSpan
+    - BitConverter ve Buffer
 
 - Hafta 2 (04.10.2018)
   - İsim alanları (namespaceler)
