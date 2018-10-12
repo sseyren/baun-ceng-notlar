@@ -1,1 +1,1 @@
-# BAUN CENG Programlama Notları
+# BIL2107 Veri Yapıları ve Algoritmalar
