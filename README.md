@@ -6,3 +6,4 @@ Balıkesir Üniversitesi'nde eğitim görmeye devam ettiğim sürece derslerde a
 Notarı tutarken git'in dallarını kullanıyorum. `Branch:` adlı menüden bulunduğunuz dalı değiştirebilir veya doğrudan bu linklerle bulunduğunuz dalı değiştirebilirsiniz:
 
 - [BIL2109 - Nesneye Yönelik Programlama](https://github.com/thesseyren/baun-ceng-notlar/tree/BIL2109-nesneye-yonelik-programlama)
+- [BIL2107 - Veri Yapıları ve Algoritmalar](https://github.com/thesseyren/baun-ceng-notlar/tree/BIL2107-veri-yapilari-ve-algoritmalar)
