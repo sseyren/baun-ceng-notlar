@@ -7,31 +7,38 @@ struct nodeStruct {
 };
 typedef nodeStruct node;
 
+void bastir(node* list){
+	node* iter = list;
+	for(int i = 0; iter != NULL; i++){
+		printf("pos-> %u, i-> %d, next->%u, data->%d\n", iter, i, iter->next, iter->data);
+		iter = iter->next;
+	}
+}
+
+void ekle(node* list, int value){
+	while(list->next != NULL){
+		list = list->next;
+	}
+	list->next = (node*)malloc(sizeof(node));
+	list->next->data = value;
+	list->next->next = NULL;
+}
+
 int main() {
-	node* root;
+	node* root = (node*)malloc(sizeof(node));
+	root->data = 500;
+	root->next = NULL;
 
-	// malloc void tipi döndürdüğünden dolayı (node*'a) tür dönüşümü yaptık
-	root = (node*)malloc(sizeof(node));
-	root->data = 10;
+	node* iter = root;
 
-	root->next = (node*)malloc(sizeof(node));
-	root->next->data = 20;
+	for(int i = 0; i < 5; i++){
+		ekle(iter, i);
+		//  ekle()'nin her seferinde listenin sonuna gitmesi için
+		// baştan başlayarak bakması yerine, sona yakın bir düğümden
+		// bakması ciddi tasarruf sağlamakta.
 
-	root->next->next = (node*)malloc(sizeof(node));
-	root->next->next->data = 30;
+		// iter = iter->next;
+	}
 
-	// Nodelar arasında daha kolay gezinmek için iter pointer'ı tanımladık.
-	node* iter;
-	iter = root;
-	printf("%d\n", iter->data);
-
-	iter = iter->next;
-	printf("%d\n", iter->data);
-
-	iter = iter->next;
-	printf("%d\n", iter->data);
-
-	iter = root;
-	printf("%d\n", iter->data);
-	printf("\n%d\n", root->data);
+	bastir(root);
 }
