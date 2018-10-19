@@ -8,11 +8,16 @@ struct nodeStruct {
 typedef nodeStruct node;
 
 void bastir(node* list){
+	if(list == NULL){
+		printf("NULL\n\n");
+		return;
+	}
 	node* iter = list;
 	for(int i = 0; iter != NULL; i++){
 		printf("pos-> %u, i-> %d, next->%u, data->%d\n", iter, i, iter->next, iter->data);
 		iter = iter->next;
 	}
+	printf("\n");
 }
 
 void ekle(node* list, int value){
@@ -37,6 +42,28 @@ node* ekleSirali(node* list, int value){
 	if ( before == list )
 		return temp;
 	before->next = temp;
+	return root;
+}
+
+node* sil(node* list, int value){
+	if(list == NULL)
+		return list;
+	node* root = list;
+	node* before = list;
+	while(list != NULL && list->data != value){
+		before = list;
+		list = list->next;
+	}
+	if(list == NULL)
+		return root;
+	else if(before == list){
+		node* newroot = list->next;
+		free(list);
+		return newroot;
+	}
+	node* trash = before->next;
+	before->next = before->next->next;
+	free(trash);
 	return root;
 }
 
@@ -68,6 +95,23 @@ int main() {
 	root = ekleSirali(root, -20);
 	root = ekleSirali(root, -30);
 	root = ekleSirali(root, 0);
-	printf("\n");
+	bastir(root);
+	root = sil(root, -30);
+	root = sil(root, -20);
+	bastir(root);
+	root = sil(root, 50);
+	root = sil(root, 40);
+	bastir(root);
+	root = sil(root, 10);
+	root = sil(root, -10);
+	root = sil(root, 15);
+	bastir(root);
+	root = sil(root, 20);
+	root = sil(root, 0);
+	root = sil(root, 25);
+	bastir(root);
+	root = sil(root, 30);
+	bastir(root);
+	root = sil(root, -15);
 	bastir(root);
 }
