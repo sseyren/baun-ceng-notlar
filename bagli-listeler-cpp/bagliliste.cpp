@@ -24,21 +24,50 @@ void ekle(node* list, int value){
 	list->next->next = NULL;
 }
 
+node* ekleSirali(node* list, int value){
+	node* root = list;
+	node* before = list;
+	while(list != NULL && list->data < value){
+		before = list;
+		list = list -> next;
+	}
+	node* temp = (node*)malloc(sizeof(node));
+	temp->data = value;
+	temp->next = list;
+	if ( before == list )
+		return temp;
+	before->next = temp;
+	return root;
+}
+
 int main() {
+	/*
 	node* root = (node*)malloc(sizeof(node));
-	root->data = 500;
+	root->data = 0;
 	root->next = NULL;
 
 	node* iter = root;
 
 	for(int i = 0; i < 5; i++){
-		ekle(iter, i);
+		ekle(iter, (i+1)*10);
 		//  ekle()'nin her seferinde listenin sonuna gitmesi için
 		// baştan başlayarak bakması yerine, sona yakın bir düğümden
 		// bakması ciddi tasarruf sağlamakta.
 
 		// iter = iter->next;
 	}
-
+	bastir(root);
+	*/
+	node* root;
+	root = ekleSirali(root, 40);
+	root = ekleSirali(root, 10);
+	root = ekleSirali(root, 30);
+	root = ekleSirali(root, 20);
+	root = ekleSirali(root, 50);
+	root = ekleSirali(root, -10);
+	root = ekleSirali(root, -20);
+	root = ekleSirali(root, -30);
+	root = ekleSirali(root, 0);
+	printf("\n");
 	bastir(root);
 }
