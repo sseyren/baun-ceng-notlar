@@ -2,6 +2,12 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 4 (18.10.2018)
+  - `System.IO` ile dosya ve dizin işlemleri
+    - `Directory` ve `DirectoryInfo` ile dizin içeriği ve dizinler hakkında bilgi edinme.
+    - `Path` ve `FileInfo` ile yol/dosya işlemleri.
+    - Dizin/Dosya oluşturma.
+
 - Hafta 3 (11.10.2018)
   - System isim alanı
   - System isim alanının içerdiği sınıflar ve metodlar
