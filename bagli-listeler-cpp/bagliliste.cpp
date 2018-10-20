@@ -48,22 +48,19 @@ node* ekleSirali(node* list, int value){
 node* sil(node* list, int value){
 	if(list == NULL)
 		return list;
-	node* root = list;
-	node* before = list;
-	while(list != NULL && list->data != value){
-		before = list;
-		list = list->next;
-	}
-	if(list == NULL)
-		return root;
-	else if(before == list){
+	else if(list->data == value){
 		node* newroot = list->next;
 		free(list);
 		return newroot;
 	}
-	node* trash = before->next;
-	before->next = before->next->next;
-	free(trash);
+	node* root = list;
+	while(list->next != NULL && list->next->data != value)
+		list = list->next;
+	if(list->next != NULL){
+		node* trash = list->next;
+		list->next = list->next->next;
+		free(trash);
+	}
 	return root;
 }
 
