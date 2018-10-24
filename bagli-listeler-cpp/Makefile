@@ -1,5 +1,6 @@
 WORKDIR=.
+FILENAME=daireselliste
 
 compile:
-	g++ ${WORKDIR}/bagliliste.cpp -o ${WORKDIR}/bagliliste.out
-	${WORKDIR}/bagliliste.out
+	g++ ${WORKDIR}/${FILENAME}.cpp -o ${WORKDIR}/${FILENAME}.out
+	${WORKDIR}/${FILENAME}.out
