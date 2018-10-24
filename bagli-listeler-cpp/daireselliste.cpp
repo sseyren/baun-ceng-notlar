@@ -12,51 +12,73 @@ void bastir(node* list){
 		printf("NULL\n\n");
 		return;
 	}
+	node* root = list;
 	node* iter = list;
-	for(int i = 0; iter != NULL; i++){
+	int i = 0;
+	do {
 		printf("pos-> %u, i-> %d, next->%u, data->%d\n", iter, i, iter->next, iter->data);
 		iter = iter->next;
-	}
+		i++;
+	} while(iter != root);
 	printf("\n");
 }
 
 void ekle(node* list, int value){
-	while(list->next != NULL){
+	node* root = list;
+	while(list->next != root){
 		list = list->next;
 	}
 	list->next = (node*)malloc(sizeof(node));
 	list->next->data = value;
-	list->next->next = NULL;
+	list->next->next = root;
 }
 
 node* ekleSirali(node* list, int value){
-	node* root = list;
-	node* before = list;
-	while(list != NULL && list->data < value){
-		before = list;
-		list = list -> next;
+	if (list == NULL){
+		node* newroot = (node*)malloc(sizeof(node));
+		newroot->data = value;
+		newroot->next = newroot;
+		return newroot;
 	}
-	node* temp = (node*)malloc(sizeof(node));
-	temp->data = value;
-	temp->next = list;
-	if ( before == list )
-		return temp;
-	before->next = temp;
+	node* root = list;
+	if(root->data > value){
+		node* newroot = (node*)malloc(sizeof(node));
+		newroot->data = value;
+		newroot->next = root;
+		while(list->next != root)
+			list = list->next;
+		list->next = newroot;
+		return newroot;
+	}
+	while(list->next != root && list->next->data < value){
+		list = list->next;
+	}
+	node* newnode = (node*)malloc(sizeof(node));
+	newnode->data = value;
+	newnode->next = list->next;
+	list->next = newnode;
 	return root;
 }
 
 node* sil(node* list, int value){
+	node* root = list;
 	if(list == NULL)
 		return list;
-	else if(list->data == value){
-		node* newroot = list->next;
-		free(list);
+	else if(root->data == value){
+		if(root->next == root){
+			free(root);
+			return NULL;
+		}
+		node* newroot = root->next;
+		while(list->next != root)
+			list = list->next;
+		list->next = newroot;
+		free(root);
 		return newroot;
 	}
-	node* root = list;
-	while(list->next != NULL && list->next->data != value)
+	while(list->next != root && list->next->data != value)
 		list = list->next;
-	if(list->next != NULL){
+	if(list->next != root){
 		node* trash = list->next;
 		list->next = list->next->next;
 		free(trash);
@@ -68,7 +90,7 @@ int main() {
 	/*
 	node* root = (node*)malloc(sizeof(node));
 	root->data = 0;
-	root->next = NULL;
+	root->next = root;
 
 	node* iter = root;
 
