@@ -3,8 +3,9 @@
 ## Konu Başlıkları ve Anahtar Kelimeler
 
 - Hafta 5 ()
-  - `FileStream` ile dosya-bayt işlemleri.
+  - `FileStream` ve `BinaryWriter` ile dosya-bayt işlemleri.
   - `StreamReader` ve `StreamWriter` ile dosya-akım-satır işlemleri.
+  - Nesneye yönelik programlamada sınıflar ve kalıtım.
 
 - Hafta 4 (18.10.2018)
   - `System.IO` ile dosya ve dizin işlemleri
