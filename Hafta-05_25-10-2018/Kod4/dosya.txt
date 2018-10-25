@@ -1,0 +1,6 @@
+Merhabalar.
+Bu bir deneme dosyasıdır.
+
+Dosyaya yazmaya devam ediyoruz.
+Girdiler buradan çıktılara dönüşmekte :)
+
