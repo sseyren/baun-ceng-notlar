@@ -1,15 +1,11 @@
 #ifndef _linkedlist
 #define _linkedlist
 
-struct nodeStruct {
-    int data;
-    nodeStruct* next;
-};
-typedef nodeStruct node;
+#include "linkedlistnode.h"
 
-void bastir(node*);
-void ekle(node*, int);
-node* ekleSirali(node*, int);
-node* sil(node*, int);
+void ll_bastir(node*);
+void ll_ekle(node*, int);
+node* ll_ekleSirali(node*, int);
+node* ll_sil(node*, int);
 
 #endif

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "linkedlist.h"
 
-void bastir(node* list){
+void ll_bastir(node* list){
 	if(list == NULL){
 		printf("NULL\n\n");
 		return;
@@ -15,7 +15,7 @@ void bastir(node* list){
 	printf("\n");
 }
 
-void ekle(node* list, int value){
+void ll_ekle(node* list, int value){
 	while(list->next != NULL){
 		list = list->next;
 	}
@@ -24,7 +24,7 @@ void ekle(node* list, int value){
 	list->next->next = NULL;
 }
 
-node* ekleSirali(node* list, int value){
+node* ll_ekleSirali(node* list, int value){
 	node* root = list;
 	node* before = list;
 	while(list != NULL && list->data < value){
@@ -40,7 +40,7 @@ node* ekleSirali(node* list, int value){
 	return root;
 }
 
-node* sil(node* list, int value){
+node* ll_sil(node* list, int value){
 	if(list == NULL)
 		return list;
 	else if(list->data == value){

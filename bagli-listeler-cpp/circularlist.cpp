@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "circularlist.h"
 
-void bastir(node* list){
+void cl_bastir(node* list){
 	if(list == NULL){
 		printf("NULL\n\n");
 		return;
@@ -18,7 +18,7 @@ void bastir(node* list){
 	printf("\n");
 }
 
-void ekle(node* list, int value){
+void cl_ekle(node* list, int value){
 	node* root = list;
 	while(list->next != root){
 		list = list->next;
@@ -28,7 +28,7 @@ void ekle(node* list, int value){
 	list->next->next = root;
 }
 
-node* ekleSirali(node* list, int value){
+node* cl_ekleSirali(node* list, int value){
 	if (list == NULL){
 		node* newroot = (node*)malloc(sizeof(node));
 		newroot->data = value;
@@ -55,7 +55,7 @@ node* ekleSirali(node* list, int value){
 	return root;
 }
 
-node* sil(node* list, int value){
+node* cl_sil(node* list, int value){
 	node* root = list;
 	if(list == NULL)
 		return list;

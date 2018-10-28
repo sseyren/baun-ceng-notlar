@@ -1,15 +1,11 @@
 #ifndef _circularlist
 #define _circularlist
 
-struct nodeStruct {
-    int data;
-    nodeStruct* next;
-};
-typedef nodeStruct node;
+#include "linkedlistnode.h"
 
-void bastir(node*);
-void ekle(node*, int);
-node* ekleSirali(node*, int);
-node* sil(node*, int);
+void cl_bastir(node*);
+void cl_ekle(node*, int);
+node* cl_ekleSirali(node*, int);
+node* cl_sil(node*, int);
 
 #endif
