@@ -2,50 +2,34 @@
 #include "stack_arr.h"
 
 int main(){
-	sa_push(10);
-	sa_push(20);
-	sa_look();
-	printf("popped -> %d\n", sa_pop());
-	printf("popped -> %d\n", sa_pop());
+	ar_stack* stack1 = sa_init();
+	ar_stack* stack2 = sa_init();
 
-	sa_push(10);
-	sa_push(20);
-	sa_push(30);
-	sa_push(40);
-	sa_push(50);
-	sa_push(60);
-	sa_look();
-	printf("popped -> %d\n", sa_pop());
-	sa_look();
-	printf("popped -> %d\n", sa_pop());
-	sa_look();
-	printf("popped -> %d\n", sa_pop());
-	sa_look();
-	printf("popped -> %d\n", sa_pop());
-	sa_look();
-	printf("popped -> %d\n", sa_pop());
-	sa_look();
-	printf("popped -> %d\n", sa_pop());
-	sa_look();
-	printf("popped -> %d\n", sa_pop());
-	sa_look();
+	for (int i = 0; i < 10; i++)
+		sa_push(i*10, stack1);
+	sa_look(stack1);
+	for (int i = 0; i < 10; i++)
+		sa_push(sa_pop(stack1), stack2);
+	sa_look(stack2);
+	sa_look(stack1);
+
 
 	int loopcount = 268435456;
 
 	int cursize = -1;
 	for(int i = 0; i < loopcount; i++){
-		sa_push(i);
-		if(sa_currentSize() != cursize){
-			printf("current size -> %d\n", sa_currentSize());
-			cursize = sa_currentSize();
+		sa_push(i, stack1);
+		if(sa_size(stack1) != cursize){
+			cursize = sa_size(stack1);
+			printf("current size -> %d\n", cursize);
 		}
 	}
 
 	for(int i = 0; i < loopcount; i++){
-		sa_pop();
-		if(sa_currentSize() != cursize){
-			printf("current size -> %d\n", sa_currentSize());
-			cursize = sa_currentSize();
+		sa_pop(stack1);
+		if(sa_size(stack1) != cursize){
+			cursize = sa_size(stack1);
+			printf("current size -> %d\n", cursize);
 		}
 	}
 
