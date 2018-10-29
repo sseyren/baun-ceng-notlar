@@ -1,92 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "stack_arr.h"
 
-int size = 2, top = 0;
-int* array = (int*)malloc(sizeof(int)*size);
+int sa_size = 2, sa_top = 0;
+int* sa_array = (int*)malloc(sizeof(int)*sa_size);
 
-int pop(){
-	if(top == 0)
+int sa_pop(){
+	if(sa_top == 0)
 		return -1;
-	if(top != 1 && size/(top-1) >= 4){
-		int newsize = size / 2;
+	if(sa_top != 1 && sa_size/(sa_top-1) >= 4){
+		int newsize = sa_size / 2;
 		int* newarray = (int*)malloc(sizeof(int)*newsize);
-		for(int i = 0; i < top; i++)
-			newarray[i] = array[i];
-		free(array);
-		array = newarray;
-		size = newsize;
+		for(int i = 0; i < sa_top; i++)
+			newarray[i] = sa_array[i];
+		free(sa_array);
+		sa_array = newarray;
+		sa_size = newsize;
 	}
-	return array[--top];
+	return sa_array[--sa_top];
 }
 
-void push(int value){
-	if (top >= size){
-		int newsize = size * 2;
+void sa_push(int value){
+	if (sa_top >= sa_size){
+		int newsize = sa_size * 2;
 		int* newarray = (int*)malloc(sizeof(int)*newsize);
-		for(int i = 0; i < size; i++)
-			newarray[i] = array[i];
-		free(array);
-		array = newarray;
-		size = newsize;
+		for(int i = 0; i < sa_size; i++)
+			newarray[i] = sa_array[i];
+		free(sa_array);
+		sa_array = newarray;
+		sa_size = newsize;
 	}
-	array[top++] = value;
+	sa_array[sa_top++] = value;
 }
 
-void look(){
-	printf("-------- Size: %d | Top: %d --------\n", size, top);
-	for(int i = 0; i < top; i++){
-		printf("%d -> %d\n", i, array[i]);
+void sa_look(){
+	printf("-------- Size: %d | Top: %d --------\n", sa_size, sa_top);
+	for(int i = 0; i < sa_top; i++){
+		printf("%d -> %d\n", i, sa_array[i]);
 	}
 	printf("------------------------------------\n");
 }
 
-int main(){
-	push(10);
-	push(20);
-	look();
-	printf("popped -> %d\n", pop());
-	printf("popped -> %d\n", pop());
-
-	push(10);
-	push(20);
-	push(30);
-	push(40);
-	push(50);
-	push(60);
-	look();
-	printf("popped -> %d\n", pop());
-	look();
-	printf("popped -> %d\n", pop());
-	look();
-	printf("popped -> %d\n", pop());
-	look();
-	printf("popped -> %d\n", pop());
-	look();
-	printf("popped -> %d\n", pop());
-	look();
-	printf("popped -> %d\n", pop());
-	look();
-	printf("popped -> %d\n", pop());
-	look();
-
-	int loopcount = 268435456;
-
-	int cursize = -1;
-	for(int i = 0; i < loopcount; i++){
-		push(i);
-		if(size != cursize){
-			printf("current size -> %d\n", size);
-			cursize = size;
-		}
-	}
-
-	for(int i = 0; i < loopcount; i++){
-		pop();
-		if(size != cursize){
-			printf("current size -> %d\n", size);
-			cursize = size;
-		}
-	}
-
-	return 0;
+int sa_currentSize(){
+	return sa_size;
 }
