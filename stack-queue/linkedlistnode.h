@@ -1,0 +1,1 @@
+../bagli-listeler-cpp/linkedlistnode.h
