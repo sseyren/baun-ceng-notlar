@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "stack_arr.h"
 #include "stack_ll.h"
+#include "queue_arr.h"
 
 int main(){
 	printf("<--------- Array ile stack örneği --------->\n");
@@ -75,6 +76,29 @@ int main(){
 	for(int i = 0; i < 67108864; i++)
 		sl_pop(&ll_stack1);
 	*/
+
+	printf("\n\n<--------- Array ile queue örneği --------->\n");
+
+	ar_queue* ar_queue1 = qa_init();
+
+	qa_enque(10, ar_queue1);
+	qa_enque(20, ar_queue1);
+	qa_look(ar_queue1);
+	printf("deque -> %d\n", qa_deque(ar_queue1));
+	printf("deque -> %d\n", qa_deque(ar_queue1));
+	qa_look(ar_queue1);
+
+	qa_enque(10, ar_queue1);
+	qa_enque(20, ar_queue1);
+	qa_enque(30, ar_queue1);
+	qa_enque(40, ar_queue1);
+	qa_look(ar_queue1);
+	printf("deque -> %d\n", qa_deque(ar_queue1));
+	qa_enque(50, ar_queue1);
+	qa_look(ar_queue1);
+	qa_enque(60, ar_queue1);
+	qa_look(ar_queue1);
+
 
 	return 0;
 }
