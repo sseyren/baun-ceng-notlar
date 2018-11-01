@@ -1,5 +1,5 @@
-#ifndef _linkedlist_arr
-#define _linkedlist_arr
+#ifndef _stack_linkedlist
+#define _stack_linkedlist
 
 #include "linkedlistnode.h"
 
