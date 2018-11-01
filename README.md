@@ -2,7 +2,12 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
-- Hafta 5 ()
+- Hafta 6 (01.11.2018)
+  - `private` `protected` anahtar sözcükleri
+  - Kalıtım ile yapıcı metodlar arasındaki ilişki
+  - `base` anahtar sözcüğü
+
+- Hafta 5 (25.10.2018)
   - `FileStream` ve `BinaryWriter` ile dosya-bayt işlemleri.
   - `StreamReader` ve `StreamWriter` ile dosya-akım-satır işlemleri.
   - Nesneye yönelik programlamada sınıflar ve kalıtım.
