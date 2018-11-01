@@ -40,15 +40,27 @@ void qa_enque(int value, ar_queue* queue){
 int qa_deque(ar_queue* queue){
 	if(queue->head == queue->tail)
 		return -1;
+	if(queue->size/(queue->tail - queue->head) >= 4){
+		int newsize = queue->size / 2;
+		int* newarray = (int*)malloc(sizeof(int) * newsize);
+		for (int i = queue->head; i < queue->tail; ++i){
+			newarray[i - queue->head] =  queue->array[i];
+		}
+		free(queue->array);
+		queue->tail = queue->tail - queue->head;
+		queue->head = 0;
+		queue->array = newarray;
+		queue->size = newsize;
+	}
 	return queue->array[queue->head++];
 }
 
 void qa_look(ar_queue* queue){
+	printf("----- Size: %d\n", queue->size);
 	if (queue->head == queue->tail){
 		printf("EMPTY\n");
 		return;
 	}
-	printf("----- Size: %d\n", queue->size);
 	for (int i = queue->head; i < queue->tail; ++i){
 		printf("%d -> %d\n", i, queue->array[i]);
 	}

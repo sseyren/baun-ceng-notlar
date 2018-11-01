@@ -99,6 +99,18 @@ int main(){
 	qa_enque(60, ar_queue1);
 	qa_look(ar_queue1);
 
+	printf("deque -> %d\n", qa_deque(ar_queue1));
+	qa_look(ar_queue1);
+	printf("deque -> %d\n", qa_deque(ar_queue1));
+	qa_look(ar_queue1);
+	printf("deque -> %d\n", qa_deque(ar_queue1));
+	qa_look(ar_queue1);
+	printf("deque -> %d\n", qa_deque(ar_queue1));
+	qa_look(ar_queue1);
+	printf("deque -> %d\n", qa_deque(ar_queue1));
+	qa_look(ar_queue1);
+	printf("deque -> %d\n", qa_deque(ar_queue1));
+	qa_look(ar_queue1);
 
 	return 0;
 }
