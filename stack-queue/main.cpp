@@ -2,6 +2,7 @@
 #include "stack_arr.h"
 #include "stack_ll.h"
 #include "queue_arr.h"
+#include "queue_ll.h"
 
 int main(){
 	printf("<--------- Array ile stack örneği --------->\n");
@@ -111,6 +112,35 @@ int main(){
 	qa_look(ar_queue1);
 	printf("deque -> %d\n", qa_deque(ar_queue1));
 	qa_look(ar_queue1);
+
+	printf("\n\n<--------- Linked list ile queue örneği --------->\n");
+
+	ll_queue* ll_queue1 = ql_init();
+	ql_enque(10, ll_queue1);
+	ql_look(ll_queue1);
+	printf("deque -> %d\n", ql_deque(ll_queue1));
+	ql_look(ll_queue1);
+
+	ql_enque(10, ll_queue1);
+	ql_look(ll_queue1);
+	printf("deque -> %d\n", ql_deque(ll_queue1));
+	ql_look(ll_queue1);
+
+	for (int i = 0; i < 10; ++i)
+		ql_enque(i * 10, ll_queue1);
+	ql_look(ll_queue1);
+
+	for (int i = 0; i < 5; ++i)
+		printf("deque -> %d\n", ql_deque(ll_queue1));
+	ql_look(ll_queue1);
+
+	for (int i = 10; i < 15; ++i)
+		ql_enque(i * 10, ll_queue1);
+	ql_look(ll_queue1);
+
+	for (int i = 0; i < 10; ++i)
+		printf("deque -> %d\n", ql_deque(ll_queue1));
+	ql_look(ll_queue1);
 
 	return 0;
 }
