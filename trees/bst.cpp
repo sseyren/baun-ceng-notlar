@@ -50,7 +50,6 @@ void preorder_trav(node* root){
 		preorder_trav(root->left);
 	if(root->right != NULL)
 		preorder_trav(root->right);
-	return;
 }
 
 void postorder_trav(node* root){
@@ -59,7 +58,6 @@ void postorder_trav(node* root){
 	if(root->right != NULL)
 		postorder_trav(root->right);
 	printf("%d ", root->data);
-	return;
 }
 
 void inorder_trav(node* root){
@@ -68,7 +66,6 @@ void inorder_trav(node* root){
 	printf("%d ", root->data);
 	if(root->right != NULL)
 		inorder_trav(root->right);
-	return;
 }
 
 void levelorder_trav(node* root){
@@ -90,4 +87,17 @@ void bst_trav(node* root, bst_trav_type type){
 	else if (type == BST_LEVELORDER)
 		levelorder_trav(root);
 	printf("\n");
+}
+
+int bst_search(int value, node* list){
+	while(list != NULL){
+		if(list->data == value)
+			return 1;
+		else if (value >= list->data){
+			list = list->right;
+		}else{
+			list = list->left;
+		}
+	}
+	return -1;
 }
