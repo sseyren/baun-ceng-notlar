@@ -16,5 +16,7 @@ int main(){
 	printf("search %d -> %d\n", 10, bst_search(10, tree1));
 	printf("search %d -> %d\n", 20, bst_search(20, tree1));
 	printf("search %d -> %d\n", 30, bst_search(30, tree1));
+
+	printf("max-> %d min -> %d\n", bst_max(tree1), bst_min(tree1));
 	return 0;
 }

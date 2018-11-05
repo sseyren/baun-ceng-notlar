@@ -101,3 +101,19 @@ int bst_search(int value, node* list){
 	}
 	return -1;
 }
+
+int bst_min(node* list){
+	if (list == NULL)
+		return -1;
+	while(list->left != NULL)
+		list = list->left;
+	return list->data;
+}
+
+int bst_max(node* list){
+	if (list == NULL)
+		return -1;
+	while(list->right != NULL)
+		list = list->right;
+	return list->data;
+}

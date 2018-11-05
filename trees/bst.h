@@ -14,5 +14,7 @@ node* bst_init();
 node* bst_add(int value, node* root);
 void bst_trav(node* root, bst_trav_type type);
 int bst_search(int value, node* list);
+int bst_min(node* list);
+int bst_max(node* list);
 
 #endif
