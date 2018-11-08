@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kod1", "Kod1\Kod1.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kod2", "Kod2\Kod2.csproj", "{9126F34F-B428-474B-9657-78EF52F0C9CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kod3", "Kod3\Kod3.csproj", "{7A8B74AF-9EF1-474A-B9D5-1CC83C9FFE9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,5 +21,9 @@ Global
 		{9126F34F-B428-474B-9657-78EF52F0C9CA}.Debug|x86.Build.0 = Debug|x86
 		{9126F34F-B428-474B-9657-78EF52F0C9CA}.Release|x86.ActiveCfg = Release|x86
 		{9126F34F-B428-474B-9657-78EF52F0C9CA}.Release|x86.Build.0 = Release|x86
+		{7A8B74AF-9EF1-474A-B9D5-1CC83C9FFE9D}.Debug|x86.ActiveCfg = Debug|x86
+		{7A8B74AF-9EF1-474A-B9D5-1CC83C9FFE9D}.Debug|x86.Build.0 = Debug|x86
+		{7A8B74AF-9EF1-474A-B9D5-1CC83C9FFE9D}.Release|x86.ActiveCfg = Release|x86
+		{7A8B74AF-9EF1-474A-B9D5-1CC83C9FFE9D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 EndGlobal
