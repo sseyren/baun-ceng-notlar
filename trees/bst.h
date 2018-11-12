@@ -1,20 +1,20 @@
 #ifndef _binary_search_tree
 #define _binary_search_tree
 
-struct nodeStruct {
+struct tnodeStruct {
 	int data;
-	nodeStruct* left;
-	nodeStruct* right;
+	tnodeStruct* left;
+	tnodeStruct* right;
 };
-typedef nodeStruct node;
+typedef tnodeStruct tnode;
 
 enum bst_trav_type { BST_PREORDER, BST_POSTORDER, BST_INORDER, BST_LEVELORDER };
 
-node* bst_init();
-node* bst_add(int value, node* root);
-void bst_trav(node* root, bst_trav_type type);
-int bst_search(int value, node* list);
-int bst_min(node* list);
-int bst_max(node* list);
+tnode* bst_init();
+tnode* bst_add(int value, tnode* root);
+void bst_trav(tnode* root, bst_trav_type type);
+int bst_search(int value, tnode* list);
+int bst_min(tnode* list);
+int bst_max(tnode* list);
 
 #endif

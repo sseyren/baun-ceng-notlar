@@ -9,24 +9,24 @@ const char* bst_trav_names[] = {
 	[BST_LEVELORDER] = "Level-ordered"
 };
 
-node* bst_init(){
+tnode* bst_init(){
 	return NULL;
 }
 
-void childKiller(node* leaf){
+void childKiller(tnode* leaf){
 	leaf->left = NULL;
 	leaf->right = NULL;
 }
 
-node* bst_add(int value, node* root){
-	node* newnode = (node*)malloc(sizeof(node));
+tnode* bst_add(int value, tnode* root){
+	tnode* newnode = (tnode*)malloc(sizeof(tnode));
 	newnode->data = value;
 	childKiller(newnode);
 
 	if(root == NULL)
 		return newnode;
 
-	node* iter = root;
+	tnode* iter = root;
 	while(true){
 		if(value >= iter->data){
 			if(iter->right == NULL){
@@ -44,7 +44,7 @@ node* bst_add(int value, node* root){
 	}
 }
 
-void preorder_trav(node* root){
+void preorder_trav(tnode* root){
 	printf("%d ", root->data);
 	if(root->left != NULL)
 		preorder_trav(root->left);
@@ -52,7 +52,7 @@ void preorder_trav(node* root){
 		preorder_trav(root->right);
 }
 
-void postorder_trav(node* root){
+void postorder_trav(tnode* root){
 	if(root->left != NULL)
 		postorder_trav(root->left);
 	if(root->right != NULL)
@@ -60,7 +60,7 @@ void postorder_trav(node* root){
 	printf("%d ", root->data);
 }
 
-void inorder_trav(node* root){
+void inorder_trav(tnode* root){
 	if(root->left != NULL)
 		inorder_trav(root->left);
 	printf("%d ", root->data);
@@ -68,11 +68,11 @@ void inorder_trav(node* root){
 		inorder_trav(root->right);
 }
 
-void levelorder_trav(node* root){
+void levelorder_trav(tnode* root){
 	printf("<levelorder-struct>\n");
 }
 
-void bst_trav(node* root, bst_trav_type type){
+void bst_trav(tnode* root, bst_trav_type type){
 	printf("%s: ", bst_trav_names[type]);
 	if(root == NULL){
 		printf("NULL\n");
@@ -89,7 +89,7 @@ void bst_trav(node* root, bst_trav_type type){
 	printf("\n");
 }
 
-int bst_search(int value, node* list){
+int bst_search(int value, tnode* list){
 	while(list != NULL){
 		if(list->data == value)
 			return 1;
@@ -102,7 +102,7 @@ int bst_search(int value, node* list){
 	return -1;
 }
 
-int bst_min(node* list){
+int bst_min(tnode* list){
 	if (list == NULL)
 		return -1;
 	while(list->left != NULL)
@@ -110,7 +110,7 @@ int bst_min(node* list){
 	return list->data;
 }
 
-int bst_max(node* list){
+int bst_max(tnode* list){
 	if (list == NULL)
 		return -1;
 	while(list->right != NULL)
