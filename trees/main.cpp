@@ -27,6 +27,19 @@ int main(){
 	printf("search %d -> %d\n", 20, bst_search(20, tree1));
 	printf("search %d -> %d\n\n", 30, bst_search(30, tree1));
 
-	printf("max-> %d min -> %d\n", bst_max(tree1), bst_min(tree1));
+	printf("max-> %d min -> %d\n\n", bst_max(tree1), bst_min(tree1));
+
+	tree1 = bst_delete(30, tree1);
+	bst_trav(tree1, BST_PREORDER);
+	tree1 = bst_delete(50, tree1);
+	bst_trav(tree1, BST_PREORDER);
+	tree1 = bst_delete(60, tree1);
+	bst_trav(tree1, BST_PREORDER);
+	tree1 = bst_delete(45, tree1);
+	bst_trav(tree1, BST_PREORDER);
+	tree1 = bst_delete(999, tree1);
+	bst_trav(tree1, BST_PREORDER);
+	tree1 = bst_delete(40, tree1);
+	bst_trav(tree1, BST_PREORDER);
 	return 0;
 }
