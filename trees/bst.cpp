@@ -120,3 +120,29 @@ int bst_max(tnode* list){
 		list = list->right;
 	return list->data;
 }
+
+tnode* bst_delete(int value, tnode* tree){
+	if (tree == NULL)
+		return NULL;
+	if (tree->data == value){
+		if (tree->left == NULL && tree->right == NULL){
+			return NULL;
+		}
+		if (tree->right != NULL){
+			int rightMin = bst_min(tree->right);
+			tree->data = rightMin;
+			tree->right = bst_delete(rightMin, tree->right);
+			return tree;
+		}
+		int leftMax = bst_max(tree->left);
+		tree->data = leftMax;
+		tree->left = bst_delete(leftMax, tree->left);
+		return tree;
+	}
+	if (tree->data <= value){
+		tree->right = bst_delete(value, tree->right);
+		return tree;
+	}
+	tree->left = bst_delete(value, tree->left);
+	return tree;
+}
