@@ -123,6 +123,7 @@ tnode* bst_delete(int value, tnode* tree){
 		return NULL;
 	if (tree->data == value){
 		if (tree->left == NULL && tree->right == NULL){
+			free(tree);
 			return NULL;
 		}
 		if (tree->right != NULL){
