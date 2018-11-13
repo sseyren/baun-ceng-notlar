@@ -16,7 +16,6 @@ tnode* bst_init(){
 void childKiller(tnode* leaf){
 	leaf->left = NULL;
 	leaf->right = NULL;
-	leaf->parent = NULL;
 }
 
 tnode* bst_add(int value, tnode* root){
@@ -32,14 +31,12 @@ tnode* bst_add(int value, tnode* root){
 		if(value >= iter->data){
 			if(iter->right == NULL){
 				iter->right = newnode;
-				newnode->parent = iter;
 				return root;
 			}
 			iter = iter->right;
 		}else{
 			if(iter->left == NULL){
 				iter->left = newnode;
-				newnode->parent = iter;
 				return root;
 			}
 			iter = iter->left;
