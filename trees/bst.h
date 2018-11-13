@@ -5,6 +5,7 @@ struct tnodeStruct {
 	int data;
 	tnodeStruct* left;
 	tnodeStruct* right;
+	tnodeStruct* parent;
 };
 typedef tnodeStruct tnode;
 
