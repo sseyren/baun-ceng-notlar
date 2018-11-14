@@ -1,14 +1,7 @@
 #ifndef _binary_search_tree
 #define _binary_search_tree
 
-struct tnodeStruct {
-	int data;
-	tnodeStruct* left;
-	tnodeStruct* right;
-};
-typedef tnodeStruct tnode;
-
-enum bst_trav_type { BST_PREORDER, BST_POSTORDER, BST_INORDER, BST_LEVELORDER };
+#include "tree_base.h"
 
 tnode* bst_init();
 tnode* bst_add(int value, tnode* root);
