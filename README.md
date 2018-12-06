@@ -2,6 +2,15 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 10 (29.11.2018)
+  - ?eksik?
+
+- Hafta 8 - 9 (15.11.2018 - 22.11.2018)
+  - Vize haftaları
+
+- Hafta 7 (08.11.2018)
+  - ?eksik?
+
 - Hafta 6 (01.11.2018)
   - `private` `protected` anahtar sözcükleri
   - Kalıtım ile yapıcı metodlar arasındaki ilişki
