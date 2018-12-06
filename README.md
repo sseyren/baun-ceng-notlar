@@ -2,6 +2,14 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 11 (06.12.2018)
+  - `interface` (arayüz) anahtar sözcüğü
+    - Arayüzler ve kalıtım
+    - Arayüzler ile sınıf üyelerine erişimler
+  - Hata yakalama (Exception handling)
+    - `try/catch/finally` anahtar kelimeleri
+    - İstisna (Exception) objesi
+
 - Hafta 10 (29.11.2018)
   - ?eksik?
 
@@ -9,7 +17,9 @@
   - Vize haftaları
 
 - Hafta 7 (08.11.2018)
-  - ?eksik?
+  - Türeyen ve temel sınıf arasındaki ilişkiler
+  - Sanal (Virtual) metodlar
+  - Çok biçimlilik (Polymorphism)
 
 - Hafta 6 (01.11.2018)
   - `private` `protected` anahtar sözcükleri
