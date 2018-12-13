@@ -2,6 +2,13 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 12 (13.12.2018)
+  - Hata mekanikleri
+    - Özelleştirilmiş hatalar fırlatma
+    - Bir hata objesinin üyeleri
+    - Bir blokta birden fazla hatanın yakalanması
+    - `ApplicationException` sınıfı
+
 - Hafta 11 (06.12.2018)
   - `interface` (arayüz) anahtar sözcüğü
     - Arayüzler ve kalıtım
