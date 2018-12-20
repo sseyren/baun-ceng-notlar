@@ -2,6 +2,14 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 13 (20.12.2018)
+  - Temsilci metodlar
+    - `delegate` anahtar sözcüğü
+    - `Delegate.GetInvocationList()` ve
+    - `Delegate.DynamicInvoke()` metodları
+    - Temsilciler ve tür dönüşümleri
+    - `Delegate.Combine()` metodu
+
 - Hafta 12 (13.12.2018)
   - Hata mekanikleri
     - Özelleştirilmiş hatalar fırlatma
