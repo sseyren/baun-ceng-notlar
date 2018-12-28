@@ -2,6 +2,12 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 14 (27.12.2018)
+  - Temsilciler ile olaylar
+    - `event` anahtar sözcüğü
+    - Temsilciler ile olay yöneticileri oluşturma
+    - `add` ve `remote` kod blokları
+
 - Hafta 13 (20.12.2018)
   - Temsilci metodlar
     - `delegate` anahtar sözcüğü
