@@ -25,8 +25,11 @@
     - `try/catch/finally` anahtar kelimeleri
     - İstisna (Exception) objesi
 
-- Hafta 10 (29.11.2018)
-  - ?eksik?
+- Hafta 10 (29.11.2018) (Emirhan Sönmez'e teşekkürler)
+  - Soyut (Abstract) nesneler
+    - `abstract` anahtar sözcüğü
+    - Soyut metodlar ve sınıflar
+    - `override` anahtar sözcüğü
 
 - Hafta 8 - 9 (15.11.2018 - 22.11.2018)
   - Vize haftaları
