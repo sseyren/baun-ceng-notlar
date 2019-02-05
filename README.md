@@ -7,3 +7,4 @@ Notarı tutarken git'in dallarını kullanıyorum. `Branch:` adlı menüden bulu
 
 - [BIL2109 - Nesneye Yönelik Programlama](https://github.com/thesseyren/baun-ceng-notlar/tree/BIL2109-nesneye-yonelik-programlama)
 - [BIL2107 - Veri Yapıları ve Algoritmalar](https://github.com/thesseyren/baun-ceng-notlar/tree/BIL2107-veri-yapilari-ve-algoritmalar)
+- [BIL2206 - Görsel Programlama](https://github.com/thesseyren/baun-ceng-notlar/tree/BIL2206-gorsel-programlama)
