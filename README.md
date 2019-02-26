@@ -2,6 +2,10 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 3 (19.02.2018)
+  - `groupBox` objesi.
+  - `Enter` ve `TextChanged` aksiyonları/eylemleri.
+
 - Hafta 2 (12.02.2019)
   - Geçen hafta yapılan örneklerin çeşitlendirilmesi.
     - `MessageBox.Show` metodu.
