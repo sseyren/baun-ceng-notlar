@@ -9,7 +9,7 @@
   - Girdilerin sadece-sayı sadece-metin filtreleriyle kontrolleri.
   - Form üzerindeki `Control`'lerin genel özelliklerinin değiştirilmesi.
 
-- Hafta 3 (19.02.2018)
+- Hafta 3 (19.02.2018) (Serdar Sarı'ya teşekkürler)
   - `groupBox` objesi.
   - `Enter` ve `TextChanged` aksiyonları/eylemleri.
 
