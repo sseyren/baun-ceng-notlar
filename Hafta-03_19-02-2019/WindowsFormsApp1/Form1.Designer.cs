@@ -75,7 +75,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Yer Degistir";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // button1
             // 
@@ -238,7 +237,6 @@
             this.sonuc.Name = "sonuc";
             this.sonuc.Size = new System.Drawing.Size(100, 22);
             this.sonuc.TabIndex = 6;
-            this.sonuc.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
             // 
             // label7
             // 
@@ -261,7 +259,6 @@
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "ISLEM";
-            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
             // button7
             // 
