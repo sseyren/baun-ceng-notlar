@@ -5,7 +5,7 @@
 - Hafta 4 (26.02.2019)
   - `MouseEnter`, `MouseLeave`, `Enter`, `Leave`, `KeyPress`, `KeyDown`, `KeyUp`, `Load`, `Validating`, `Validated` eylemleri.
   - Objelerin `.Visible` özellikleri ile görünürlüklerinin değiştirilmesi.
-  - `maskedTextBox1` objesi.
+  - `maskedTextBox` objesi.
   - Girdilerin sadece-sayı sadece-metin filtreleriyle kontrolleri.
   - Form üzerindeki `Control`'lerin genel özelliklerinin değiştirilmesi.
 
