@@ -2,6 +2,12 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 5 (05.03.2019)
+  - `richTextBox` objesi ve yazı biçimlendirme.
+  - `fontDialog`, `saveFileDialog`, `openFileDialog` ve `colorDialog` kullanıcı dialog pencereleri.
+  - Uygulama içerisinde birden fazla Form açmak.
+  - Genel olarak metin biçimlendirmeleri
+
 - Hafta 4 (26.02.2019)
   - `MouseEnter`, `MouseLeave`, `Enter`, `Leave`, `KeyPress`, `KeyDown`, `KeyUp`, `Load`, `Validating`, `Validated` eylemleri.
   - Objelerin `.Visible` özellikleri ile görünürlüklerinin değiştirilmesi.
