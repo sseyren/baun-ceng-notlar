@@ -2,6 +2,10 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 6 (12.03.2019)
+  - `listBox` ve `checkedListBox` objeleri içinde aramalar yapmak.
+  - `dateTimePicker` ve çeşitli menüler tasarlamak.
+
 - Hafta 5 (05.03.2019)
   - `richTextBox` objesi ve yazı biçimlendirme.
   - `fontDialog`, `saveFileDialog`, `openFileDialog` ve `colorDialog` kullanıcı dialog pencereleri.
