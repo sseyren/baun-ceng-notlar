@@ -2,6 +2,9 @@
 
 ## Konu Başlıkları ve Anahtar Kelimeler
 
+- Hafta 7 ve 8 (19.03.2019 - 26.03.2019)
+  - Vize haftaları
+
 - Hafta 6 (12.03.2019)
   - `listBox` ve `checkedListBox` objeleri içinde aramalar yapmak.
   - `dateTimePicker` ve çeşitli menüler tasarlamak.
@@ -10,7 +13,7 @@
   - `richTextBox` objesi ve yazı biçimlendirme.
   - `fontDialog`, `saveFileDialog`, `openFileDialog` ve `colorDialog` kullanıcı dialog pencereleri.
   - Uygulama içerisinde birden fazla Form açmak.
-  - Genel olarak metin biçimlendirmeleri
+  - Genel olarak metin biçimlendirmeleri.
 
 - Hafta 4 (26.02.2019)
   - `MouseEnter`, `MouseLeave`, `Enter`, `Leave`, `KeyPress`, `KeyDown`, `KeyUp`, `Load`, `Validating`, `Validated` eylemleri.
