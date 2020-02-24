@@ -1,22 +1,23 @@
-int potPin = A0;
-int ledPort = 2;
+int rPin = 9;
+int gPin = 10;
+int bPin = 11;
 
 void setup() {
-  // put your setup code here, to run once:
+  pinMode(rPin, OUTPUT);
+  pinMode(gPin, OUTPUT);
+  pinMode(bPin, OUTPUT);
   Serial.begin(9600);
-  Serial.println("Analog input okuma örneği ");
-  pinMode(ledPort, OUTPUT);
+  Serial.println(" ");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  int deger = analogRead(potPin);
-  float hesap = (5.0 * deger) / 1023.0;
-  Serial.println(hesap);
-  if(deger > 300 && deger < 700) {
-    digitalWrite(ledPort, HIGH);
-  } else {
-    digitalWrite(ledPort, LOW);
+  if(Serial.available()) {
+    int r = Serial.parseInt();
+    int g = Serial.parseInt();
+    int b = Serial.parseInt();
+
+    analogWrite(rPin, 255-r);
+    analogWrite(gPin, 255-g);
+    analogWrite(bPin, 255-b);
   }
-  delay(100);
 }
