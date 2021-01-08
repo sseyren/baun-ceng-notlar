@@ -1,1 +1,1 @@
-# BAUN CENG Programlama Notları
+# BMM4111 Makine Öğrenmesi
