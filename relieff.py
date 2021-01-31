@@ -1,4 +1,4 @@
-import os
+import os, sys
 import numpy as np
 
 from helpers import manhattan_distance
@@ -81,6 +81,8 @@ class ReliefF:
 
 
 if __name__ == "__main__":
+    np.set_printoptions(precision=3, suppress=True, threshold=sys.maxsize)
+
     X = np.array([
         [ 3,  7, -1],
         [ 0,  4,  2],

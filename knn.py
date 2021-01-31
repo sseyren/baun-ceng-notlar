@@ -1,5 +1,5 @@
+import os, sys
 import numpy as np
-import os
 
 from helpers import euclidean_distance
 
@@ -12,7 +12,7 @@ class KNN:
         self.target = y
 
     def predict_one(self, a:np.ndarray):
-        distances = [euclidean_distance(a, x) for x in self.train]
+        distances = np.array([euclidean_distance(a, x) for x in self.train])
         print("Bu noktanın veri setindeki diğer noktalara uzaklıkları:")
         print(distances, end=os.linesep*2)
 
@@ -30,6 +30,8 @@ class KNN:
         return majority
 
 if __name__ == "__main__":
+    np.set_printoptions(precision=3, suppress=True, threshold=sys.maxsize)
+
     model = KNN(k=3)
     model.fit(np.array([
         [10, 1, 0],

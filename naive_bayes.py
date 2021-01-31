@@ -1,7 +1,7 @@
 # Based on https://github.com/python-engineer/MLfromscratch/blob/master/mlfromscratch/naivebayes.py
 # Thanks to https://github.com/python-engineer
 
-import os
+import os, sys
 import numpy as np
 
 class NaiveBayes:
@@ -87,6 +87,8 @@ class NaiveBayes:
 
 
 if __name__ == "__main__":
+    np.set_printoptions(precision=3, suppress=True, threshold=sys.maxsize)
+
     X = np.array([
         [10,  1,  0],
         [ 4,  4,  2],

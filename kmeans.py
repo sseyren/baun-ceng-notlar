@@ -1,5 +1,5 @@
+import os, sys
 import numpy as np
-import os
 
 from helpers import euclidean_distance
 
@@ -73,6 +73,8 @@ class KMeans:
             print()
 
 if __name__ == "__main__":
+    np.set_printoptions(precision=3, suppress=True, threshold=sys.maxsize)
+
     model = KMeans(k=2)
     model.fit(np.array([
         [5, 3],

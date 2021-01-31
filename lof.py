@@ -1,5 +1,5 @@
+import os, sys
 import numpy as np
-import os
 
 from helpers import euclidean_distance
 
@@ -86,6 +86,8 @@ class LOF:
             print(" LOF: {}".format(self.LOF(i)))
 
 if __name__ == "__main__":
+    np.set_printoptions(precision=3, suppress=True, threshold=sys.maxsize)
+
     class cases:
         case1 = np.array([
             [1,1],
