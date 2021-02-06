@@ -10,20 +10,11 @@ class KMeans:
     def get_empty_clusters(self):
         return [[] for i in range(self.k)]
 
-    def fit(self, x:np.ndarray):
-        self.points = x
-        self.clusters = self.get_empty_clusters()
-        self.centroids = np.copy(self.points[0:self.k])
-
     def get_dist_matrix(self):
         l = []
-        for p in self.points:
+        for p in self.X:
             l.append([euclidean_distance(p, c) for c in self.centroids])
-
-        arr = np.array(l)
-        print("Mevcut merkezlerle noktaların uzaklık matrisi:")
-        print(arr)
-        return arr
+        return np.array(l)
 
     def new_clusters(self):
         new_clusters = self.get_empty_clusters()
@@ -38,24 +29,47 @@ class KMeans:
     def new_centroids(self):
         l = []
         for cluster in self.clusters:
-            merged = np.array([self.points[index] for index in cluster])
+            merged = np.array([self.X[index] for index in cluster])
             l.append(np.average(merged, axis=0))
 
         return np.array(l)
 
-    def calculate(self):
+    def fit(self, X:np.ndarray):
+        self.X = X
+        print("X'in satırları:")
+        self._list_vecs(X, "x")
+        print()
+
+        self.clusters = self.get_empty_clusters()
+        self.centroids = np.copy(X[0:self.k])
+        print(f"İterasyona başlamadan önce X'in ilk {self.k} satırını " +
+            "merkez noktalar olarak seçiyoruz.")
+        self._list_vecs(self.centroids)
+        print(os.linesep)
+
         iteration = 0
         while True:
             iteration += 1
             print(f"İterasyon: {iteration}")
+            print()
 
             print("Mevcut merkezler:")
-            print(self.centroids)
+            self._list_vecs(self.centroids)
+            print()
+
+            dist_matrix = self.get_dist_matrix()
+            print("Mevcut merkezlerle noktaların uzaklık matrisi:")
+            print(("{:<8}"*(self.k+1)).format("", *[f"c_{x}" for x in range(1, self.k+1)]))
+            self._format_array(dist_matrix)
+            print()
 
             new_clusters = self.new_clusters()
-            print("Kümeler:")
+            print("x_'leri kendisine en yakın merkezlerin bulunduğu kümelere koyuyoruz.")
+            print("Yeni kümeler:")
             for i, cluster in enumerate(new_clusters, 1):
-                print(f"{i} -> {[j+1 for j in cluster]}")
+                elements = ", ".join(f"x_{j+1}" for j in cluster)
+                print(f"{i} -> {elements}")
+            print()
 
             if new_clusters == self.clusters:
                 print("Önceki kümeler, yeni kümelerle aynı.")
@@ -66,11 +80,29 @@ class KMeans:
                 "Yeni kümeler, önceki kümelerden farklı, " +
                 "yeni merkezler hesaplanmalı."
             )
+            print("Kümenin elemanlarının ortalamaları kümenin yeni merkezini verir.")
+            print()
+
             self.clusters = new_clusters
             self.centroids = self.new_centroids()
+
             print("Yeni Merkezler:")
-            print(self.centroids)
-            print()
+            for cluster_i, cluster in enumerate(self.clusters):
+                formula = ", ".join(f"x_{x+1}" for x in cluster)
+                print(f"c_{cluster_i+1} = ort({formula}) = {self.centroids[cluster_i]}")
+
+            print(os.linesep)
+
+    def _format_array(self, arr, prefix="x"):
+        _, col = arr.shape
+        row_template = "{:<8}" + "{:<8.3f}" * col
+        for d_i, d in enumerate(arr, 1):
+            elements = [f"x_{d_i}"] + [x for x in d]
+            print(row_template.format(*elements))
+
+    def _list_vecs(self, arr, prefix="c"):
+        for v_i, v in enumerate(arr, 1):
+            print(f"{prefix}_{v_i} = {v}")
 
 if __name__ == "__main__":
     np.set_printoptions(precision=3, suppress=True, threshold=sys.maxsize)
@@ -86,5 +118,3 @@ if __name__ == "__main__":
         [-3, 2],
         [4, 1],
     ]))
-
-    model.calculate()
