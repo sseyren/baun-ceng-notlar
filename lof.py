@@ -6,27 +6,13 @@ from helpers import euclidean_distance
 class LOF:
     def __init__(self, k=2):
         self.k = k
-
-    def fit(self, points:np.ndarray):
-        self.points = points
-        self.dist_matrix = np.array([self.dist_array(i)
-            for i in range(len(self.points))])
-        self.k_dist_matrix = np.array([self.k_distance(i)
-            for i in range(len(self.points))])
-        self.k_neigh_array = [self.k_neighbors(i)
-            for i in range(len(self.points))]
-
-        self.reach_dist_matrix = []
-        for i in range(len(self.points)):
-            self.reach_dist_matrix.append(
-                [self.reachability_distance(i, j) for j in range(len(self.points))]
-            )
-        self.reach_dist_matrix = np.array(self.reach_dist_matrix)
+        print(f"k = {self.k}")
+        print()
 
     def dist_array(self, index:int):
         """Bir noktanın (kendisi dahil) başka noktalara olan uzaklıkları."""
-        return [euclidean_distance(self.points[index], n)
-            for n in self.points]
+        return [euclidean_distance(self.X[index], n)
+            for n in self.X]
 
     def k_distance(self, index:int):
         """Bir noktanın k-uzaklığı."""
@@ -47,7 +33,7 @@ class LOF:
     def reachability_distance(self, i:int, j:int):
         return max(
             self.k_dist_matrix[j],
-            euclidean_distance(self.points[i], self.points[j])
+            euclidean_distance(self.X[i], self.X[j])
         )
 
     def LRD(self, i:int):
@@ -67,41 +53,81 @@ class LOF:
         result = (sum_lrd / len(neighbors)) / self.LRD(i)
         return result
 
-    def compute_all(self):
-        print("Noktaların birbirlerine olan uzaklıkların matrisi:")
-        print(self.dist_matrix, end=os.linesep*2)
+    def fit(self, X:np.ndarray):
+        self.X = X
+        print("X (girdi) matrisinin satırları (elemanları):")
+        self._print_arr(X, header=False)
+        print()
 
+        self.dist_matrix = np.array([self.dist_array(i) for i in range(len(X))])
+        print("Noktaların birbirlerine olan (öklid) uzaklıkların matrisi:")
+        self._print_arr(self.dist_matrix, label="d()")
+        print()
+
+        self.k_dist_matrix = np.array([self.k_distance(i) for i in range(len(X))])
         print("Noktaların K-Uzaklıkları:")
-        print(self.k_dist_matrix, end=os.linesep*2)
+        print(f"(noktaya en yakın k. ({self.k}.) noktanın uzaklığı)")
+        for dist_i, dist in enumerate(self.k_dist_matrix, 1):
+            print(f"kd(x_{dist_i}) = {dist:<8.3f}")
+        print()
 
+        self.k_neigh_array = [self.k_neighbors(i) for i in range(len(X))]
+
+        self.reach_dist_matrix = []
+        for i in range(len(X)):
+            self.reach_dist_matrix.append(
+                [self.reachability_distance(i, j) for j in range(len(X))]
+            )
+        self.reach_dist_matrix = np.array(self.reach_dist_matrix)
         print("Reachability Distance matrisi:")
-        print(self.reach_dist_matrix, end=os.linesep*2)
+        print("rd(x, y) = max(kd(y), d(x,y))")
+        self._print_arr(self.reach_dist_matrix, label="rd()")
+        print()
 
-        for i in range(len(self.points)):
-            print(f"Nokta {i+1}:")
-            print(" k-komşular: {}".format(
-                [x+1 for x in self.k_neigh_array[i]]
+        print("Her noktanın k-komşular listesi:")
+        for i in range(len(X)):
+            print("N_k({}) = {}".format(
+                f"x_{i+1}",
+                ", ".join([f"x_{j+1}" for j in self.k_neigh_array[i]])
             ))
-            print(" LRD: {}".format(self.LRD(i)))
-            print(" LOF: {}".format(self.LOF(i)))
+        print()
+
+        print("Her nokta için LRD:")
+        for i in range(len(X)):
+            rd_formula = " + ".join(f"rd(x_{i+1}, x_{j+1})" for j in self.k_neigh_array[i])
+            print(f"LRD(x_{i+1}) = |N_k(x_{i+1})|={len(self.k_neigh_array[i])} / ( {rd_formula} )")
+            print(f"LRD(x_{i+1}) = {self.LRD(i):.3f}")
+            print()
+
+        print("Her nokta için LOF:")
+        for i in range(len(X)):
+            lrd_formula = " + ".join(f"LRD(x_{j+1})" for j in self.k_neigh_array[i])
+            print(f"LOF(x_{i+1}) = ( {lrd_formula} ) / ( |N_k(x_{i+1})|={len(self.k_neigh_array[i])} * LRD(x_{i+1}) )")
+            print(f"LOF(x_{i+1}) = {self.LOF(i):.3f}")
+            print()
+
+    def _print_arr(self, arr, prefix="x", header=True, label=""):
+        _, n_col = arr.shape
+
+        if header:
+            header_str = ("{:<8}" * n_col).format(*(f"{prefix}_{i}" for i in range(1, n_col+1)))
+            print(f"{label:<8}{header_str}")
+
+        row_str = "{:<8}" + ("{:<8.3f}" * n_col)
+        for row_i, row in enumerate(arr, 1):
+            elements = [f"{prefix}_{row_i}"] + [i for i in row]
+            print(row_str.format(*elements))
+
 
 if __name__ == "__main__":
     np.set_printoptions(precision=3, suppress=True, threshold=sys.maxsize)
 
-    class cases:
-        case1 = np.array([
-            [1,1],
-            [1,2],
-            [2,1],
-            [3,3],
-        ])
-        case2 = np.array([
-            [2,3],
-            [1,4],
-            [0,2],
-            [1,3],
-        ])
+    X = np.array([
+        [2,3],
+        [1,4],
+        [0,2],
+        [1,3],
+    ])
 
     model = LOF(k=2)
-    model.fit(cases.case2)
-    model.compute_all()
+    model.fit(X)
