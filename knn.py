@@ -32,8 +32,7 @@ class KNN:
 if __name__ == "__main__":
     np.set_printoptions(precision=3, suppress=True, threshold=sys.maxsize)
 
-    model = KNN(k=3)
-    model.fit(np.array([
+    X = np.array([
         [10, 1, 0],
         [4, 4, 2],
         [4, -2, 4],
@@ -42,7 +41,8 @@ if __name__ == "__main__":
         [-2, 8, 1],
         [-3, 3, 3],
         [-4, 0, -4],
-    ]), np.array([
+    ])
+    y = np.array([
         1,
         1,
         0,
@@ -51,7 +51,10 @@ if __name__ == "__main__":
         1,
         0,
         0,
-    ]))
+    ])
+
+    model = KNN(k=3)
+    model.fit(X, y)
 
     result = model.predict_one(np.array([2, -3, 4]))
     print(f"Sonuç: {result}")

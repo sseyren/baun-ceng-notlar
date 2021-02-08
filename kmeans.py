@@ -99,8 +99,7 @@ class KMeans:
 if __name__ == "__main__":
     np.set_printoptions(precision=3, suppress=True, threshold=sys.maxsize)
 
-    model = KMeans(k=2)
-    model.fit(np.array([
+    X = np.array([
         [5, 3],
         [7, 2],
         [1, 4],
@@ -109,4 +108,7 @@ if __name__ == "__main__":
         [8, 4],
         [-3, 2],
         [4, 1],
-    ]))
+    ])
+
+    model = KMeans(k=2)
+    model.fit(X)
