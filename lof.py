@@ -1,7 +1,7 @@
 import os, sys
 import numpy as np
 
-from helpers import euclidean_distance
+from helpers import euclidean_distance, print_arr
 
 class LOF:
     def __init__(self, k=2):
@@ -56,12 +56,12 @@ class LOF:
     def fit(self, X:np.ndarray):
         self.X = X
         print("X (girdi) matrisinin satırları (elemanları):")
-        self._print_arr(X, header=False)
+        print_arr(X, header=False)
         print()
 
         self.dist_matrix = np.array([self.dist_array(i) for i in range(len(X))])
         print("Noktaların birbirlerine olan (öklid) uzaklıkların matrisi:")
-        self._print_arr(self.dist_matrix, label="d()")
+        print_arr(self.dist_matrix, label="d()")
         print()
 
         self.k_dist_matrix = np.array([self.k_distance(i) for i in range(len(X))])
@@ -81,7 +81,7 @@ class LOF:
         self.reach_dist_matrix = np.array(self.reach_dist_matrix)
         print("Reachability Distance matrisi:")
         print("rd(x, y) = max(kd(y), d(x,y))")
-        self._print_arr(self.reach_dist_matrix, label="rd()")
+        print_arr(self.reach_dist_matrix, label="rd()")
         print()
 
         print("Her noktanın k-komşular listesi:")
@@ -105,18 +105,6 @@ class LOF:
             print(f"LOF(x_{i+1}) = ( {lrd_formula} ) / ( |N_k(x_{i+1})|={len(self.k_neigh_array[i])} * LRD(x_{i+1}) )")
             print(f"LOF(x_{i+1}) = {self.LOF(i):.3f}")
             print()
-
-    def _print_arr(self, arr, prefix="x", header=True, label=""):
-        _, n_col = arr.shape
-
-        if header:
-            header_str = ("{:<8}" * n_col).format(*(f"{prefix}_{i}" for i in range(1, n_col+1)))
-            print(f"{label:<8}{header_str}")
-
-        row_str = "{:<8}" + ("{:<8.3f}" * n_col)
-        for row_i, row in enumerate(arr, 1):
-            elements = [f"{prefix}_{row_i}"] + [i for i in row]
-            print(row_str.format(*elements))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import os, sys
 import numpy as np
 
-from helpers import euclidean_distance
+from helpers import euclidean_distance, print_arr
 
 class KMeans:
     def __init__(self, k=2):
@@ -59,8 +59,7 @@ class KMeans:
 
             dist_matrix = self.get_dist_matrix()
             print("Mevcut merkezlerle noktaların uzaklık matrisi:")
-            print(("{:<8}"*(self.k+1)).format("", *[f"c_{x}" for x in range(1, self.k+1)]))
-            self._format_array(dist_matrix)
+            print_arr(dist_matrix, col_prefix="c")
             print()
 
             new_clusters = self.new_clusters()
@@ -92,13 +91,6 @@ class KMeans:
                 print(f"c_{cluster_i+1} = ort({formula}) = {self.centroids[cluster_i]}")
 
             print(os.linesep)
-
-    def _format_array(self, arr, prefix="x"):
-        _, col = arr.shape
-        row_template = "{:<8}" + "{:<8.3f}" * col
-        for d_i, d in enumerate(arr, 1):
-            elements = [f"x_{d_i}"] + [x for x in d]
-            print(row_template.format(*elements))
 
     def _list_vecs(self, arr, prefix="c"):
         for v_i, v in enumerate(arr, 1):
