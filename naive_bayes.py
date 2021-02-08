@@ -4,6 +4,8 @@
 import os, sys
 import numpy as np
 
+from helpers import print_arr
+
 class NaiveBayes:
 
     def fit(self, X, y):
@@ -28,62 +30,80 @@ class NaiveBayes:
         print("her sütun bir feature temsil ediyor.")
         print()
         print("Ortalama matrisi:")
-        print(self._mean)
+        print_arr(self._mean, row_prefix="m", header=False, num_start=0)
         print()
         print("Varyans matrisi:")
-        print(self._var)
+        print_arr(self._var, row_prefix="v", header=False, num_start=0)
         print()
         print("Her sınıf için önsel olasılık:")
-        print(self._priors)
+        for p_i, p in enumerate(self._priors):
+            print(f"p_{p_i} = {p:.3f}")
         print(os.linesep)
 
-    def predict(self, X):
-        y_pred = [self._predict(x) for x in X]
-        return np.array(y_pred)
-
-    def _predict(self, x):
+    def predict(self, x):
         posteriors = []
 
+        print(f"x = {x}")
+        print()
+
         # calculate posterior probability for each class
-        for idx, c in enumerate(self._classes):
-            print(f"{c} sınıfı için:")
+        for idx in self._classes:
+            print(f"{idx} sınıfı için:")
 
             prior = np.log(self._priors[idx])
-            print(f"{self._priors[idx]} önsel olasılığın log'u: {prior}")
-            print()
-
             pdf = self._pdf(idx, x)
-            print(f"P({x} | {idx}) = {pdf}")
 
             pdf_log = np.log(pdf)
-            print(f"Bu vektörün log'u: {pdf_log}")
+            print(f"Bu vektörün log'u: log(P(x|{idx})) = {pdf_log}")
 
-            posterior = np.sum(pdf_log)
-            print(f"Vektör bileşenlerin toplamı: {posterior}")
+            sum_pdf = np.sum(pdf_log)
+            print(f"Vektör bileşenlerin toplamı: {sum_pdf:.3f}")
             print()
 
-            posterior = prior + posterior
-            print(f"Önsel olasılık ile toplamı: {posterior}")
-            print("Bu sınıf için olasılık sonucuna ulaşıldı.")
+            posterior = prior + sum_pdf
+            print(f"log(p_{idx}) = {prior:.3f} (önsel olasılık)")
+            print(f"Önsel olasılık ile toplamı: log(p_{idx}) + {sum_pdf:.3f} = {posterior:.3f}")
+            print(f"{idx} sınıfı için olasılık: {posterior:.3f}")
             print(os.linesep)
 
             posteriors.append(posterior)
 
+        posteriors = np.array(posteriors)
         print(f"Tüm sınıflar için olasılıklar: {posteriors}")
 
         # return class with highest posterior probability
         result = self._classes[np.argmax(posteriors)]
         print(f"En yüksek olasılık {result} sınıfında mevcut")
-        print(os.linesep)
 
         return result
 
-    def _pdf(self, class_idx, x):
-        mean = self._mean[class_idx]
-        var = self._var[class_idx]
+    def _pdf(self, idx, x):
+        print("exp(x) = e^x")
+        print("sqrt(x) = x'in karekökü")
+
+        mean = self._mean[idx]
+        var = self._var[idx]
+
         numerator = np.exp(- (x-mean)**2 / (2 * var))
         denominator = np.sqrt(2 * np.pi * var)
-        return numerator / denominator
+
+        print(f"P(x|{idx}) = pay / payda")
+        print()
+
+        print(f"pay = exp( -(x - m_{idx})^2 / 2 * v_{idx} )")
+        print(f"pay = exp( {-(x-mean)**2} / {2 * var} )")
+        print(f"pay = {numerator}")
+        print()
+
+        print(f"payda =  sqrt(2 * pi * v_{idx})")
+        print(f"payda =  sqrt({2 * np.pi * var})")
+        print(f"payda = {denominator}")
+        print()
+
+        result = numerator / denominator
+        print(f"P(x|{idx}) = {result}")
+
+        return result
 
 
 if __name__ == "__main__":
@@ -99,6 +119,7 @@ if __name__ == "__main__":
         [-3,  3,  3],
         [-4,  0, -4],
     ])
+    # y mutlaka 0'dan başlamalı ve ardışık olarak artmalı
     y = np.array([
         1,
         1,
@@ -109,13 +130,8 @@ if __name__ == "__main__":
         0,
         0,
     ])
-    test = np.array([
-        [2, -3, 4],
-    ])
+    test = np.array([2, -3, 4])
 
     nb = NaiveBayes()
     nb.fit(X, y)
-    predictions = nb.predict(test)
-
-    print(f"Bu modele göre sonuçlar:")
-    print(predictions)
+    nb.predict(test)
