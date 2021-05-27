@@ -136,3 +136,19 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# LaTeX
+*.tex
+*.aux
+*.lof
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.fdb_latexmk
+*.pdf
