@@ -1,12 +1,7 @@
 from functools import reduce
 from operator import xor
 
-def generate_tuples(n=2):
-    counter = 0
-    for _ in range(pow(2, n)):
-        bitstr = format(counter, f"0{n}b")
-        yield tuple(int(b) for b in bitstr)
-        counter += 1
+from helpers import generate_tuples
 
 def linear_function(*coeff):
     """
