@@ -187,6 +187,15 @@ class Boole:
         return result
 
     def autocorr_func(self):
+        """
+        Boole fonksiyonunun otokorelasyon fonksiyonunu verir.
+        Bir `function` döndürür.
+
+        Döndürülen fonksiyon tuple alır.
+        AttrFree.int döndürür, ona eklenen attr'lar:
+        - .repr
+        """
+
         def func(*d):
             s = 0
             tabular = []
@@ -204,6 +213,24 @@ class Boole:
             return s
 
         return func
+
+    def absolute_indicator(self):
+        """Boole fonksiyonunun mutlak gösterge değeri.
+        Otokorelasyon fonksiyonunu tüm tuple'ları (d=(0,0...0) hariç) dener ve
+        mutlak değerce en büyüğünü döndürür.
+        
+        AttrFree.int döndürür, ona eklenen attr'lar:
+        - .values
+        """
+
+        tuples = generate_tuples(self.n)
+        next(tuples) # ilk tuple'ı çıkardık
+
+        f = self.autocorr_func()
+        values = [abs(f(*t)) for t in tuples]
+        result = AttrFree.int(max(values))
+        result.values = values
+        return result
 
 
 def _get_latex_doc():

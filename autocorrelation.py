@@ -5,18 +5,25 @@ from helpers import generate_tuples, Boole, _get_latex_doc
 
 def main(f:Boole, pdf_path=Path.cwd() / __file__[:-3]):
     autocorr_func = f.autocorr_func()
+    indicator = f.absolute_indicator()
 
     doc = _get_latex_doc()
     doc.append(pylatex.NoEscape(
         r"""$F_2 = \{0, 1\}$ ve $F_2^n$, $F_2$ kümesinin kendisiyle $n$ defa
         kartezyen çarpımı olsun. """
         +
-        f"""$n = {f.n}$ değişkenli $f(x)$ Boole fonksiyonunun otokorelasyon fonksiyonu
-        $r_f(d)$ şöyledir:"""
+        f"$n = {f.n}$ değişkenli $f(x)$ Boole fonksiyonunun "+
+        r"\textbf{otokorelasyon fonksiyonu} $r_f(d)$ şöyledir:"
     ))
     doc.append(pylatex.Math(
         escape=False,
         data=r"r_f(d) = \sum_{x \in F_2^"+str(f.n)+r"} (-1)^{f(x)}(-1)^{f(x \oplus d)}"
+    ))
+
+    doc.append(pylatex.NoEscape(
+        r"""$f(x)$ boole fonksiyonunun \textbf{mutlak göstergesi}
+        $d = (0, 0, ..., 0)$ noktasındaki otokorelasyon değeri dışındaki
+        diğer değerlerin mutlak değerce en büyüğüdür."""
     ))
 
     doc.append(pylatex.utils.bold("Hesaplamalar:"))
@@ -41,9 +48,17 @@ def main(f:Boole, pdf_path=Path.cwd() / __file__[:-3]):
                 table.add_row(row)
                 table.add_hline()
 
-        doc.append(pylatex.NoEscape(
-            f"$r_f(d)$ = $r_f{d}$ = {result}"
+        doc.append(pylatex.Math(
+            inline=True,
+            escape=False,
+            data=f"r_f(d) = r_f{d} = {result} \\longrightarrow |r_f(d)| = {abs(result)}"
         ))
+
+    doc.append(pylatex.NoEscape(
+        f"""{indicator.values} değerleri arasından en büyük {indicator}
+        olduğundan $f(x)$ boole fonksiyonunun mutlak gösterge değeri {indicator}
+        olur."""
+    ))
 
     doc.generate_pdf(pdf_path)
 
