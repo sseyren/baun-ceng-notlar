@@ -1,5 +1,7 @@
 from functools import reduce
 from operator import xor
+from itertools import product
+from copy import deepcopy
 import math
 import numpy as np
 import pylatex
@@ -82,6 +84,53 @@ class AttrFree:
 
     class int(int):
         pass
+
+class Term:
+    """
+    `Boole.algebraic_degree` metodu için eklenmiş sınıf. Boole fonksiyonunun
+    doğruluk tablosundan cebirsel ifadesinin elde edilmesi için kullanılır.
+    """
+
+    def __init__(self, *items):
+        if all(type(i) == int for i in items):
+            self.items = set(items)
+        else:
+            raise Exception("Use only integers")
+
+    def __str__(self):
+        # for latex
+        return "".join(f"x_{i}" for i in self.items)
+
+    def __repr__(self):
+        # for debug
+        return f"<{ ' '.join(str(i) for i in self.items) }>"
+
+    def __eq__(self, other):
+        return self.items == other.items
+
+    def __rmul__(self, other):
+        u = set()
+        u = u.union(self.items)
+        if type(other) != int:
+            u = u.union(other.items)
+        return Term(*u)
+
+    def __mul__(self, other):
+        return self.__rmul__(other)
+
+    @classmethod
+    def generate_eq_part(cls, t):
+        part = []
+        for index, item in enumerate(t, 1):
+            if item == 1:
+                part.append( [Term(index)] )
+            elif item == 0:
+                part.append( [Term(index), 1] )
+        return part
+
+    @classmethod
+    def expand_parts(cls, a:list, b:list):
+        return [x * y for x, y in product(a, b)]
 
 class Boole:
     """
@@ -230,6 +279,55 @@ class Boole:
         values = [abs(f(*t)) for t in tuples]
         result = AttrFree.int(max(values))
         result.values = values
+        return result
+
+    def algebraic_degree(self):
+        """
+        Boole fonksiyonunun cebirsel derecesini verir. Önce fonksiyonun
+        cebirsel ifadesini elde eder. Bulunan cebirsel ifadede, çarpım halinde
+        kullanılan en yüksek değişken sayısıdır.
+
+        AttrFree.int döndürür, eklenen attr'lar:
+        - .history
+        """
+
+        # sadeleştirme adımları için geçmişi tutuyoruz
+        history = []
+        # fonksiyonun true olduğu durumlar
+        true_tuples = [t for t in generate_tuples(self.n) if self(*t)]
+
+        # terimler oluşturuluyor
+        equation = [Term.generate_eq_part(t) for t in true_tuples]
+        history.append(deepcopy(equation))
+
+        # terimlerin kendi içinde kartezyen çarpımları
+        for i in range(len(equation)):
+            while len(equation[i]) > 1:
+                a, b = equation[i].pop(), equation[i].pop()
+                equation[i].append(Term.expand_parts(a, b))
+
+            # böyle bir ihtimal yok ama öylesine yazdım
+            if len(equation[i]) == 0:
+                del equation[i]
+            else:
+                equation[i] = equation[i][0]
+
+        history.append(deepcopy(equation))
+        # [[]], [[]] --> [], []
+        equation = sum(equation, [])
+
+        # sadeleştirme: aynı terimden bir tane daha varsa sil
+        i = 0
+        while i < len(equation):
+            if equation[i] not in equation[i+1:]:
+                i += 1
+                continue
+            pos = equation.index(equation[i], i+1)
+            del equation[pos], equation[i]
+
+        history.append(deepcopy(equation))
+        result = AttrFree.int(max(len(term.items) for term in equation))
+        result.history = history
         return result
 
 
