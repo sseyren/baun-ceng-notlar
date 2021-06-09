@@ -25,9 +25,8 @@ def linear_function(*coeff):
     """
     f = lambda *x: reduce(xor, [x[num] * c for num, c in enumerate(coeff)])
 
-    # string representation
-    # TOOD: make this latex repr or add one
-    f.repr = " ^ ".join(f"{c}*x{num}" for num, c in enumerate(coeff, 1))
+    # latex representation
+    f.repr = r" \oplus ".join(f"{c}x_{num}" for num, c in enumerate(coeff, 1))
     return f
 
 def hamming_dist(x:list, y:list):

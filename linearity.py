@@ -31,7 +31,7 @@ def main(f:Boole, pdf_path=Path.cwd() / __file__[:-3]):
         for i, lin_func in enumerate(val.functions, 1):
             itemize.add_item(
                 pylatex.Math(inline=True, escape=False,
-                    data=f"f_{i} = {lin_func.repr}"))
+                    data=f"f_{i}(x) = {lin_func.repr}"))
 
     doc.append(pylatex.NoEscape(
         r"$f$ fonksiyonunun doğruluk tablosu:"
