@@ -1,20 +1,12 @@
 import pylatex
 from pathlib import Path
 
-from helpers import generate_tuples, Boole
+from helpers import generate_tuples, Boole, _get_latex_doc
 
 def main(f:Boole, pdf_path=Path.cwd() / __file__[:-3]):
     autocorr_func = f.autocorr_func()
 
-    doc = pylatex.Document(
-        document_options=["a4paper","12pt"],
-        geometry_options={"margin": "1in"},
-    )
-    doc.content_separator = "%\n\n"
-    doc.preamble.append(
-        pylatex.UnsafeCommand("setlength", r"\parskip", extra_arguments="1em")
-    )
-
+    doc = _get_latex_doc()
     doc.append(pylatex.NoEscape(
         r"""$F_2 = \{0, 1\}$ ve $F_2^n$, $F_2$ kümesinin kendisiyle $n$ defa
         kartezyen çarpımı olsun. """
