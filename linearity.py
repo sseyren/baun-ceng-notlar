@@ -14,10 +14,11 @@ def main(f:Boole, pdf_path=Path.cwd() / __file__[:-3]):
     doc = _get_latex_doc()
 
     doc.append(pylatex.NoEscape(
-        f"""$f$ boole fonksiyonunun doğrusal olmama değerini hesaplayabilmek
-        için {f.n} ($f$'in derecesidir) elemanlı tüm lineer fonksiyonlar
-        bulunur. Ardından bu fonksiyonlar ile $f$ fonksiyonu arasındaki uzaklık
-        hamming uzaklığı ile ölçülür."""
+        f"""$f$ boole fonksiyonunun doğrusal olmama değerini ($NL_f$) 
+        hesaplayabilmek için derecesi {f.n} ($f$'in derecesidir) olan tüm lineer
+        fonksiyonlar bulunur. Ardından bu fonksiyonlar ile $f$ fonksiyonu
+        arasındaki uzaklıklar hamming uzaklığı ile ölçülür. Bu uzaklıklardan
+        en küçüğü $f$'in doğrusal olmama değeridir."""
     ))
     doc.append(pylatex.NoEscape(
         """Hamming uzaklığı iki fonksiyonun doğruluk tablosunun birbirlerinden
@@ -74,7 +75,7 @@ def main(f:Boole, pdf_path=Path.cwd() / __file__[:-3]):
 
     doc.append(pylatex.NoEscape(
         f"""Bu uzaklıklar içinden en küçüğü {val} olduğundan $f$ fonksiyonunun
-        doğrusal olmama değeri {val} olur."""
+        doğrusal olmama değeri $NL_f = {val}$ olur."""
     ))
 
     doc.generate_pdf(pdf_path)
