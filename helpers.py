@@ -212,7 +212,7 @@ class Boole:
 
         # truth_table sıralı değildir, sıralı biçimde tüm değerlerin
         # alınabilmesi için `generate_tuples` kullanıldı
-        target = list(self.truth_table[t] for t in generate_tuples(self.n))
+        target = list(self(*t) for t in generate_tuples(self.n))
 
         # Tüm lineer fonksiyonlar
         functions = [linear_function(*t) for t in generate_tuples(self.n)]
