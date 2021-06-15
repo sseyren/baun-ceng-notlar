@@ -177,14 +177,17 @@ class Boole:
             while True:
                 try:
                     self._method(tuple(0 for i in range(n)))
-                except IndexError:
+                except (IndexError, TypeError):
                     n += 1
                 else:
                     self._n = n
                     break
 
     def __call__(self, *args):
-        if self._method:
+        if len(args) != self.n:
+            raise TypeError(f"This Boole func takes exactly {self.n} argument "+
+                f"({len(args)} given)")
+        elif self._method:
             return self._method(args)
         elif self._truth_table:
             return self._truth_table[args]
