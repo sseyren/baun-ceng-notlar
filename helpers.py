@@ -161,7 +161,7 @@ class Boole:
         self._truth_table = None
         self._method = None
         # Boole fonksiyonunun değişken sayısı
-        self.n = 0
+        self._n = None
 
         if type(dict_or_func) == dict:
             key_lens = set(map(len, dict_or_func.keys()))
@@ -169,7 +169,7 @@ class Boole:
                 raise Exception("Dict'te sorun var")
 
             self._truth_table = dict_or_func.copy()
-            self.n = key_lens.pop()
+            self._n = key_lens.pop()
         elif callable(dict_or_func):
             self._method = dict_or_func
 
@@ -180,7 +180,7 @@ class Boole:
                 except IndexError:
                     n += 1
                 else:
-                    self.n = n
+                    self._n = n
                     break
 
     def __call__(self, *args):
@@ -191,6 +191,10 @@ class Boole:
         else:
             raise NotImplementedError("Boole fonksiyonu için doğruluk tablosu "+
                 "veya fonksiyon girilmedi")
+
+    @property
+    def n(self):
+        return self._n
 
     @property
     def truth_table(self):
