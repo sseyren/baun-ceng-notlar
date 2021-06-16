@@ -340,10 +340,12 @@ class Boole:
         return result
 
 
-def _get_latex_doc():
+def _get_latex_doc(landscape=False, margin="1in"):
     doc = pylatex.Document(
-        document_options=["a4paper","12pt"],
-        geometry_options={"margin": "1in"},
+        document_options=["a4paper","12pt"] +
+            ["landscape"] if landscape else []
+        ,
+        geometry_options={"margin": margin},
     )
     doc.content_separator = "%\n\n"
     doc.preamble.append(
