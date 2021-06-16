@@ -6,7 +6,7 @@ import math
 import numpy as np
 import pylatex
 
-def generate_tuples(n=2):
+def generate_tuples(n=2, reverse=False):
     """
     Sıralı tuple'lar oluşturur. Örneğin `n=2` için
     `(0,0) (0,1) (1,0) (1,1)` gibi tuple'lar oluşturur.
@@ -17,6 +17,8 @@ def generate_tuples(n=2):
     counter = 0
     for _ in range(pow(2, n)):
         bitstr = format(counter, f"0{n}b")
+        if reverse:
+            bitstr = bitstr[::-1]
         yield tuple(int(b) for b in bitstr)
         counter += 1
 
