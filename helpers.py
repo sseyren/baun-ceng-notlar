@@ -61,6 +61,23 @@ def truth_table_from_list(x:list):
         raise Exception("Length of list should be power of 2")
     return dict(zip(generate_tuples(int(n)), x))
 
+def tuple_op(*tuples, op=xor):
+    """
+    Tuple içindeki elemanları karşılıklı olarak `op` işleminden geçirir.
+    Tuple'ların aynı uzunlukta olması gerekir.
+    ```
+    > tuple_op((0,1), (1,0), op=xor)
+    (1, 1)
+    > tuple_op((0,1), (1,0), (0,1), op=add)
+    (1, 2)
+    ```
+    """
+
+    if len(set(len(t) for t in tuples)) != 1:
+        raise Exception("Tuple'ların uzunlukları aynı değil.")
+
+    return tuple(reduce(op, i) for i in zip(*tuples))
+
 class AttrFree:
     """
     Bu sınıfın amacı `int`, `str`, `bool` gibi temel sınıfların attribute
@@ -348,6 +365,7 @@ def _get_latex_doc(landscape=False, margin="1in"):
         geometry_options={"margin": margin},
     )
     doc.content_separator = "%\n\n"
+    doc.packages.append(pylatex.Package("enumitem"))
     doc.preamble.append(
         pylatex.UnsafeCommand("setlength", r"\parskip", extra_arguments="1em")
     )

@@ -10,6 +10,7 @@ from helpers import (
     AttrFree,
     truth_table_from_list,
     generate_tuples,
+    tuple_op,
     _get_latex_doc
 )
 
@@ -146,6 +147,24 @@ class SBox:
         ]
         return result
 
+    def differential_isomorphism(self, a:tuple, b:tuple):
+        """
+        S-kutusunun `a` ve `b` için farksal birbiçimliliğini hesaplar.
+
+        AttrFree.int döndürür, eklenen attr'lar:
+        - `.tests`
+        """
+
+        tests = {
+            x: tuple_op(self(*tuple_op(x, a)) , self(*x))
+            for x in generate_tuples(self.n)
+        }
+        success = list(filter(lambda t: t == b, tests.values()))
+
+        result = AttrFree.int(len(success))
+        result.tests = tests
+        return result
+
 
 def header_from_tuple(t:tuple):
     return r" \oplus ".join(f"f_{i+1}(x)" for i, val in enumerate(t) if val)
@@ -239,14 +258,90 @@ def main(sbox:SBox, pdf_path=Path.cwd() / __file__[:-3]):
         derecesi $d_f = {algebraic_degree}$ olur.
     """))
 
+
+    doc.append(pylatex.NoEscape(r"""
+        Bir $S: F_2^n \rightarrow F_2^m$ S-kutusunun \textbf{farksal
+        birbiçimlilik dağılımı} aşağıdaki ifadeyle bulunur: (\# işareti, kümenin
+        eleman sayısını belirtir.)
+    """))
+
+    doc.append(pylatex.Math(
+        data=r"""\delta_s(\alpha, \beta) =
+        \#\{ x \in F_2^n : S(x \oplus a) \oplus S(x) = \beta \}""",
+        escape=False
+    ))
+
+    doc.append(pylatex.NoEscape(r"""
+        Bu formül sadece $\alpha$ ve $\beta$ değerleri için farksal
+        birbiçimlilik dağılımını hesaplar. Tüm $\alpha$ ve $\beta$ değerleri
+        için bunları hesaplarsak \textbf{farksal birbiçimlilik tablosu}nu
+        oluşturabiliriz.
+    """))
+
+    for alpha in generate_tuples(sbox.n):
+        for beta in generate_tuples(sbox.n):
+            result = sbox.differential_isomorphism(alpha, beta)
+
+            doc.append(pylatex.NoEscape(f"""
+                $\\alpha = {alpha}$ ve $\\beta = {beta}$ için
+                $\\delta_s(\\alpha, \\beta) = {result}$ olacaktır. Şöyle ki:
+            """))
+
+            with doc.create(pylatex.Itemize(options="nosep")) as itemize:
+                for x in generate_tuples(sbox.n):
+                    test = result.tests[x]
+                    eq = "=" if test == beta else "\\ne"
+                    itemize.add_item(pylatex.NoEscape(f"""
+                        $x = {x}$ için $S(x \\oplus a) \\oplus S(x) =
+                        S({x} \\oplus {alpha}) \\oplus S({x}) =
+                        {test} {eq} \\beta = {beta}$
+                    """))
+
+    doc.append(pylatex.NoEscape(r"""
+        S-kutusunun farksal birbiçimlilik tablosu:
+    """))
+
+    all_tuples = list(generate_tuples(sbox.n))
+    table_spec = "c|c|" + ("c|" * len(all_tuples))
+    with doc.create(pylatex.Tabular(table_spec)) as table:
+        table.add_row([
+            pylatex.MultiColumn(2, align='c'),
+            pylatex.MultiColumn(
+                len(all_tuples), align='c',
+                data=pylatex.NoEscape(r"$\beta$")
+            )
+        ])
+        table.add_hline(start=2)
+        table.add_row(
+            [
+                pylatex.MultiRow(
+                    len(all_tuples) + 1,
+                    data=pylatex.NoEscape(r"$\alpha$")
+                ),
+                pylatex.NoEscape(r"$\delta_s(\alpha, \beta)$")
+            ] + all_tuples
+        )
+        table.add_hline(start=2)
+
+        for alpha in all_tuples:
+            table.add_row(["", alpha] + [
+                sbox.differential_isomorphism(alpha, b)
+                for b in all_tuples
+            ])
+            table.add_hline(start=2)
+
     doc.generate_pdf(pdf_path)
 
 if __name__ == "__main__":
     # TODO: S-kutularının tanımı daha kolay olmalı.
-    s = SBox([
-        Boole(truth_table_from_list([0,1,1,0,0,0,1,1])),
-        Boole(truth_table_from_list([0,1,0,1,0,1,0,1])),
-        Boole(truth_table_from_list([0,0,0,0,1,1,1,1])),
-    ])
+    #s = SBox([
+    #    Boole(truth_table_from_list([0,1,1,0,0,0,1,1])),
+    #    Boole(truth_table_from_list([0,1,0,1,0,1,0,1])),
+    #    Boole(truth_table_from_list([0,0,0,0,1,1,1,1])),
+    #])
 
+    s = SBox([
+        Boole(truth_table_from_list([0,1,0,1])),
+        Boole(truth_table_from_list([0,1,1,0])),
+    ])
     main(s)
